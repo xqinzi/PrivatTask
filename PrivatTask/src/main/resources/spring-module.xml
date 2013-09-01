@@ -1,0 +1,15 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+		<import resource="database/spring-datasource.xml" />
+		<import resource="beans/spring-beans.xml" />
+		
+		<bean id="someService" class="org.andrew.malapura.service.SomeServiceImpl">
+		       <property name="streetDAO" ref="streetDAO" />
+		       <property name="flatDAO" ref="flatDAO" />
+		       <property name="houseDAO" ref="houseDAO" />
+		       <property name="ownerDAO" ref="ownerDAO" />
+		       <property name="personalAccountDAO" ref="personalAccountDAO" />
+		</bean>
+</beans>
