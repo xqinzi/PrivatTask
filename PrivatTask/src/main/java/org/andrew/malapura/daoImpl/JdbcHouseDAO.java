@@ -60,12 +60,12 @@ public class JdbcHouseDAO extends JdbcDaoSupport implements HouseDAO {
 	/**
 	 * 		удаление записи из таблицы
 	 */
-	public void delete(Long id) {
+	public void delete(House house) {
 		/**
 	     *  SQL запрос 
 	     */
 		String sql = "DELETE FROM HOUSE WHERE ID = ?";
-		getJdbcTemplate().update(sql, new Object[] { id });
+		getJdbcTemplate().update(sql, new Object[] { house.getId() });
 
 	}
 

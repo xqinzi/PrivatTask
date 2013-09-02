@@ -10,12 +10,12 @@ import java.util.Date;
  *
  */
 
-public class PersonalAccount {
+public class PersonAccount {
 	 
 	private Long id;  					// id записи
 	private String accountNumber;  // Номер лицевого счета
 	private String accountType;		// тип л.с. (квартплата, газоснабж., водоснабж, и т.д.)
-	private Long flatId;				    // ссылка на объект КВАРТИРА
+	private Long flatId;				    // ссылка на объект КВАРТ�?РА
 	private Long ownerId;				// ссылка на объект ВЛАДЕЛЕЦ л.с.
 	private Date createdDate;        // дата создания л.с.
 	

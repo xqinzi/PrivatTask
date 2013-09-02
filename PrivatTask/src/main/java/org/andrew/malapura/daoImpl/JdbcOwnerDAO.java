@@ -4,40 +4,56 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.andrew.malapura.dao.OwnerDAO;
-import org.andrew.malapura.entity.Flat;
 import org.andrew.malapura.entity.Owner;
-import org.andrew.malapura.model.FlatRowMapper;
+import org.andrew.malapura.model.OwnerRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 public class JdbcOwnerDAO extends JdbcDaoSupport implements OwnerDAO {
-
-	public void add(Owner obj) {
-		// TODO Auto-generated method stub
+     /**
+      *   создание новой записи ВЛАДЕЛЕЦ
+      * @param ВЛАДЕЛЕЦ
+      */
+	public void add(Owner owner) {
+		String sql = "INSERT INTO OWNER (FIRST_NAME, PATRONYMIC, SECOND_NAME, BIRTHDAY, INN) VALUES (?, ?, ?, ?, ?)";
+		getJdbcTemplate().update(sql, new Object[] {owner.getFirstName(), owner.getPatronymic(), owner.getSecondName(), owner.getBirthday(), owner.getInn() });
 
 	}
-
+    /**
+     * 	
+     * @param ID записи ВЛАДЕЛЕЦ
+     * @return объект ВЛАДЕЛЕЦ
+     */
 	public Owner getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT * FROM OWNER WHERE ID = ?";
+		OwnerRowMapper mapper = new OwnerRowMapper();
+		getJdbcTemplate().query(sql, new Object[]{}, mapper);
+		return mapper.getOwner();
 	}
 	/**
+	 *         коллекция всех ВЛАДЕЛЬЦЕВ
 	 * @return список ВЛАДЕЛЬЦЕВ лицевых счетов
 	 */
 	public List<Owner> getAll() {
 		String sql = "SELECT * FROM OWNER";
 		@SuppressWarnings("unchecked")
-		ArrayList<Owner> owners = (ArrayList<Owner>) getJdbcTemplate().query(sql, new FlatRowMapper());
+		ArrayList<Owner> owners = (ArrayList<Owner>) getJdbcTemplate().query(sql, new OwnerRowMapper());
 		return owners;
 	}
-
-	public void update(Owner obj) {
-		// TODO Auto-generated method stub
-
+    /**
+     * 	обновление записи ВЛАДЕЛЕЦ
+	 *     @param ВЛАДЕЛЕЦ
+     */
+	public void update(Owner owner) {
+		String sql = "UPDATE OWNER SET FIRST_NAME=?, PATRONYMIC=?, SECOND_NAME=?, BIRTHDAY=?, INN=? WHERE ID = ?";
+		getJdbcTemplate().update(sql, new Object[] { owner.getFirstName(), owner.getPatronymic(), owner.getSecondName(), owner.getBirthday(), owner.getInn(), owner.getId() });
 	}
-	
-	public void delete(Long id) {
+	/**
+	 * 	удаление записи ВЛАДЕЛЕЦ
+	 *    @param ВЛАДЕЛЕЦ
+	 */
+	public void delete(Owner owner) {
 		String sql = "DELETE FROM OWNER WHERE ID = ?";
-
+		getJdbcTemplate().update(sql, new Object[] { owner.getId() });
 	}
 
 }

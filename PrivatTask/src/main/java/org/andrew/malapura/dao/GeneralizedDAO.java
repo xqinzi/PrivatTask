@@ -15,5 +15,5 @@ public interface GeneralizedDAO<T> {
 	T getById(Long id);               //  read
 	List<T> getAll();					  //  read all records
 	void update(T obj);              // update
-	void delete(Long id);            // delete
+	void delete(T obj);            // delete
 }

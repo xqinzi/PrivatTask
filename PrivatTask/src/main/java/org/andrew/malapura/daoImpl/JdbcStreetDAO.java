@@ -9,7 +9,7 @@ import org.andrew.malapura.model.StreetRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 /**
  * 
- *  реализация интерфейса УЛИЦА
+ *  имплементация DAO сущности УЛИЦА
  *  
  * @author mav
  *
@@ -54,9 +54,9 @@ public class JdbcStreetDAO extends JdbcDaoSupport implements StreetDAO {
 	/**
 	 * 	удалить запись
 	 */
-	public void delete(Long id) {
+	public void delete(Street street) {
 		String sql = "DELETE FROM STREET WHERE ID = ?";
-		getJdbcTemplate().update(sql, new Object[] { id });
+		getJdbcTemplate().update(sql, new Object[] { street.getId() });
 	}
 
 
