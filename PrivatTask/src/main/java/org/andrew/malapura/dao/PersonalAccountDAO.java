@@ -1,7 +1,7 @@
 package org.andrew.malapura.dao;
 
-import org.andrew.malapura.entity.PersonAccount;
+import org.andrew.malapura.entity.PersonalAccount;
 
-public interface PersonalAccountDAO extends GeneralizedDAO<PersonAccount>{
+public interface PersonalAccountDAO extends GeneralizedDAO<PersonalAccount>{
 
 }
