@@ -10,7 +10,7 @@ import java.util.Date;
  *
  */
 
-public class PersonAccount {
+public class PersonalAccount {
 	 
 	private Long id;  					// id записи
 	private String accountNumber;  // Номер лицевого счета
