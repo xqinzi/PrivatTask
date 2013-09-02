@@ -25,7 +25,7 @@ public class StreetRowMapper implements RowMapper {
 
 	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
  
-		 if(street == null ) street = new Street();
+		street = new Street();
 		
 		/**
 		 *    заполнение данными из объекта типа ResultSet
@@ -34,7 +34,7 @@ public class StreetRowMapper implements RowMapper {
 		street.setId(rs.getLong("ID"));
 		street.setStreetName(rs.getString("STREET_NAME"));
 		
-		return null;
+		return street;
 	}
 
 }

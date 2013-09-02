@@ -47,9 +47,9 @@ public class JdbcStreetDAO extends JdbcDaoSupport implements StreetDAO {
 	/**
 	 * 	обновление записи 
 	 */
-	public void update(Long id, Street street) {
+	public void update(Street street) {
 		String sql = "UPDATE STREET SET STREET_NAME = ? WHERE ID = ?";
-		getJdbcTemplate().update(sql, new Object[] { street.getStreetName(), id });
+		getJdbcTemplate().update(sql, new Object[] { street.getStreetName(), street.getId() });
 	}
 	/**
 	 * 	удалить запись

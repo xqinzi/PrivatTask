@@ -4,7 +4,7 @@ package org.andrew.malapura.entity;
  * 
  * @author mav
  *
- *   таблица КВАРТИРА
+ *   сущность КВАРТИРА
  *
  */
 
@@ -26,9 +26,9 @@ public class Flat {
 	 */
 	private Double sqLiv;
 	/**
-	 *  	id дома в котором находится квартира
+	 *  	объект ДОМ в котором находится квартира
 	 */
-	private Long houseId;  
+	private House house;  
 	/**
 	 * 	этаж
 	 */
@@ -64,11 +64,11 @@ public class Flat {
 	public void setSqLiv(Double sqLiv) {
 		this.sqLiv = sqLiv;
 	}
-	public Long getHouseId() {
-		return houseId;
+	public House getHouse() {
+		return house;
 	}
-	public void setHouseId(Long houseId) {
-		this.houseId = houseId;
+	public void setHouse(House house) {
+		this.house = house;
 	}
 	public Integer getFloorNum() {
 		return floorNum;

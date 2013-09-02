@@ -11,12 +11,18 @@ import org.springframework.jdbc.core.RowMapper;
  *
  */
 public class PersonAccountRowMapper implements RowMapper {
+	
+	  PersonalAccount personalAccount;
+
+	public PersonalAccount getPersonalAccount() {
+			return personalAccount;
+		}
 
 	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
 		/**
 		 *   	соданиие объекта ЛИЦЕВОЙ СЧЕТ
 		 */
-		PersonalAccount personalAccount = new PersonalAccount();
+		personalAccount = new PersonalAccount();
 		/**
 		 * 	заполнение данными из объекта типа ResultSet
 		 */

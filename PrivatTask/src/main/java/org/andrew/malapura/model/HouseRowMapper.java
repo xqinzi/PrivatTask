@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
  *
  */
 public class HouseRowMapper implements RowMapper {
+	
 	House house;
 	
 	/**
@@ -29,15 +30,17 @@ public class HouseRowMapper implements RowMapper {
 		/* заполнение данными из объекта типа ResultSet
 		 * 
 		 */
-		if(house == null){ house = new House(); }
+		house = new House();
 		house.setId(rs.getLong("ID"));
-		house.setHouseNumber(rs.getString("HOUSE_NUNBER"));
+		house.setHouseNumber(rs.getString("HOUSE_NUMBER"));
 		house.setHouseType(rs.getString("HOUSE_TYPE"));
 		house.setMatType(rs.getString("MAT_TYPE"));
 		  Street street = new Street();
+		  street.setId(rs.getLong("ID"));
 		  street.setStreetName(rs.getString("STREET_NAME"));
+		house.setStreet(street);  
 		
-		return null;
+		return house;
 	}
 
 }

@@ -7,24 +7,30 @@ import org.andrew.malapura.dao.HouseDAO;
 import org.andrew.malapura.dao.OwnerDAO;
 import org.andrew.malapura.dao.PersonalAccountDAO;
 import org.andrew.malapura.dao.StreetDAO;
+import org.andrew.malapura.entity.Flat;
+import org.andrew.malapura.entity.House;
 import org.andrew.malapura.entity.Street;
 
 /**
- *  Реализация сервиса SomeService
+ *  Имплементация сервиса SomeService
  * @author mav
  *
  */
 public class SomeServiceImpl implements SomeService {
+	
 	/**
-	 *  инъекция DAO объектов
+	 *    инъекция DAO объектов
 	 */
-	StreetDAO streetDAO;
-	FlatDAO flatDAO;
-	HouseDAO houseDAO;
-	OwnerDAO ownerDAO;
-	PersonalAccountDAO personalAccountDAO;
+	StreetDAO streetDAO; 										 // для сущности УЛИЦА
+	FlatDAO flatDAO;													 // для сущности КВАРТИРА
+	HouseDAO houseDAO;											 // для сущности ДОМ	
+	OwnerDAO ownerDAO;										 // для сущности ВЛАДЕЛЕЦ
+	PersonalAccountDAO personalAccountDAO;			 // для сущности ЛИЦЕВОЙ СЧЕТ
+	
+	// **************     CRUD для сущности УЛИЦА     ********************
+	
 	/**
-	 *  список всех записей сущности УЛИЦА
+	 *  возвращает список всех УЛИЦ
 	 */
 	public List<Street> getAllStreet() {
 		return streetDAO.getAll();
@@ -32,9 +38,10 @@ public class SomeServiceImpl implements SomeService {
 	/**
 	 *   получить объект улица по id
 	 * @param уникальный ключ записи УЛИЦА
+	 * @return объект УЛИЦА
+	 * 
 	 */
 	public Street findStreetById(Long id) {
-		// TODO Auto-generated method stub
 		return streetDAO.getById(id);
 	}
 	/**
@@ -46,8 +53,8 @@ public class SomeServiceImpl implements SomeService {
    /**
     * 		обновление записи УЛИЦА
     */
-	public void updateStreet(Long id, Street street) {
-		streetDAO.update(id, street);	
+	public void updateStreet(Street street) {
+		streetDAO.update(street);	
 	}
 	/**
 	 *    удаление записи УЛИЦА
@@ -55,9 +62,55 @@ public class SomeServiceImpl implements SomeService {
 	public void deleteStreet(Long id){
 		
 	}
+	
+	// **************     CRUD для сущности ДОМ     ********************
 	/**
-	 *   setters для DAO объектов
+	 *   возвращает список всех домов
 	 */
+	public List<House> getAllHouses(){	
+		return houseDAO.getAll();
+	}
+	public House findHouseById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public void addHouse(House house) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void updateHouse(House house) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void deleteHouse(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	// **************     CRUD для сущности КВАРТИРА     *************
+	
+	public Flat findFlatById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public List<Flat> getAllFlats() {
+		return flatDAO.getAll();
+	}
+	public void addFlat(Flat flat) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void updateFlat(Flat flat) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void deleteFlat(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	// ************   setters для DAO объектов ***********************
+	
 	public void setStreetDAO(StreetDAO streetDAO) {
 		this.streetDAO = streetDAO;
 	}
@@ -77,5 +130,7 @@ public class SomeServiceImpl implements SomeService {
 	public void setPersonalAccountDAO(PersonalAccountDAO personalAccountDAO) {
 		this.personalAccountDAO = personalAccountDAO;
 	}
+	
+	
 
 }

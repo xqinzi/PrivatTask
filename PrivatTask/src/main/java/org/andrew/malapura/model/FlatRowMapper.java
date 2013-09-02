@@ -4,6 +4,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.andrew.malapura.entity.Flat;
+import org.andrew.malapura.entity.House;
+import org.andrew.malapura.entity.Street;
 import org.springframework.jdbc.core.RowMapper;
 /**
  * 
@@ -17,7 +19,9 @@ public class FlatRowMapper implements RowMapper {
 			return flat;
 		}
 	
-	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
+	public Flat mapRow(ResultSet rs, int rowNum) throws SQLException {
+		
+		flat = new Flat();
 	    /**
 		/* заполнение данными из объекта типа ResultSet
 		 * 
@@ -28,7 +32,22 @@ public class FlatRowMapper implements RowMapper {
 	    flat.setDoorWayNum(rs.getInt("DOOR_WAY_NUM"));
 	    flat.setSqTotal(rs.getDouble("SQ_TOTAL"));
 	    flat.setSqLiv(rs.getDouble("SQ_LIV"));
-	    flat.setHouseId(rs.getLong("HOUSE_ID"));
+	     /**
+	      *  вставляем объект ДОМ в объект КВАРТИРА
+	      */
+		        House house = new House();
+		    	house.setId(rs.getLong("ID"));
+		    	house.setHouseNumber(rs.getString("HOUSE_NUMBER"));
+		    	house.setHouseType(rs.getString("HOUSE_TYPE"));
+		    	house.setMatType(rs.getString("MAT_TYPE"));
+		    	 /**
+		    	  *     Вставляем объект УЛИЦА в объект ДОМ  
+		    	  */
+			    	  Street street = new Street();
+					  street.setId(rs.getLong("ID"));
+					  street.setStreetName(rs.getString("STREET_NAME"));
+				house.setStreet(street);  	    	
+	    flat.setHouse(house);
 	    
 		return flat;
 	}

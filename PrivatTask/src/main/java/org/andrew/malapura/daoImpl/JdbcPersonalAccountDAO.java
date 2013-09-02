@@ -24,7 +24,7 @@ public class JdbcPersonalAccountDAO extends JdbcDaoSupport implements
 		return null;
 	}
 
-	public void update(Long id, PersonalAccount obj) {
+	public void update(PersonalAccount obj) {
 		// TODO Auto-generated method stub
 
 	}

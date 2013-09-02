@@ -11,16 +11,22 @@ import org.springframework.jdbc.core.RowMapper;
  *
  */
 public class OwnerRowMapper implements RowMapper {
+	
+	Owner owner;
 
-	public Object mapRow(ResultSet rs, int rowNum) throws SQLException {
-		Owner owner = new Owner();
+	public final Owner getOwner() {
+		return owner;
+	}
+
+	public Owner mapRow(ResultSet rs, int rowNum) throws SQLException {
+		owner = new Owner();
 		
 		owner.setId(rs.getLong("ID"));
-		owner.setBirthday(rs.getDate("BIRTHDAY"));
-		owner.setFirstName(rs.getString("FIRST_NAME"));
-		owner.setPatronymic(rs.getString("PATRONYMIC"));
-		owner.setSecondName(rs.getString("SECOND_NAME"));
-		owner.setInn(rs.getString("INN"));
+		owner.setBirthday(rs.getDate("BIRTHDAY"));								// дата рождения
+		owner.setFirstName(rs.getString("FIRST_NAME"));						// Имя
+		owner.setPatronymic(rs.getString("PATRONYMIC"));					// Отчество
+		owner.setSecondName(rs.getString("SECOND_NAME"));				// Фамилия	
+		owner.setInn(rs.getString("INN"));											// Индефикационный код
 		
 		return owner;
 	}
