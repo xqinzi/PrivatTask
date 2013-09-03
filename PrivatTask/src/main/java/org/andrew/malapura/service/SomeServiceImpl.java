@@ -1,5 +1,6 @@
 package org.andrew.malapura.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.andrew.malapura.dao.FlatDAO;
@@ -9,6 +10,8 @@ import org.andrew.malapura.dao.PersonalAccountDAO;
 import org.andrew.malapura.dao.StreetDAO;
 import org.andrew.malapura.entity.Flat;
 import org.andrew.malapura.entity.House;
+import org.andrew.malapura.entity.Owner;
+import org.andrew.malapura.entity.PersonalAccount;
 import org.andrew.malapura.entity.Street;
 
 /**
@@ -59,55 +62,163 @@ public class SomeServiceImpl implements SomeService {
 	/**
 	 *    удаление записи УЛИЦА
 	 */
-	public void deleteStreet(Long id){
-		
+	public void deleteStreet(Street street){
+		streetDAO.delete(street);
 	}
 	
 	// **************     CRUD для сущности ДОМ     ********************
 	/**
-	 *   возвращает список всех домов
+	 *   возвращает список ДОМОВ
 	 */
 	public List<House> getAllHouses(){	
 		return houseDAO.getAll();
 	}
+	/**
+	 *  поиск ДОМа по id записи в БД
+	 */
 	public House findHouseById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return houseDAO.getById(id);
 	}
+	/**
+	 *  создаёт новую запись ДОМ
+	 */
 	public void addHouse(House house) {
-		// TODO Auto-generated method stub
-		
+		houseDAO.add(house);
 	}
+	/**
+	 *   обновляет запись ДОМ
+	 */
 	public void updateHouse(House house) {
-		// TODO Auto-generated method stub
+		houseDAO.update(house);
 		
 	}
-	public void deleteHouse(Long id) {
-		// TODO Auto-generated method stub
+	/**
+	 *   удаляет запись ДОМ
+	 */
+	public void deleteHouse(House house) {
+		houseDAO.delete(house);
 		
 	}
 	
 	// **************     CRUD для сущности КВАРТИРА     *************
 	
+	/**
+	 *   поиск КВАРТИРЫ по ID записи в БД
+	 */
 	public Flat findFlatById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return flatDAO.getById(id);
 	}
+	/**
+	 *  возвращает список КВАРТИР
+	 */
 	public List<Flat> getAllFlats() {
 		return flatDAO.getAll();
 	}
+	/**
+	 *  создаёт новую запись КВАРТИРА в БД
+	 */
 	public void addFlat(Flat flat) {
-		// TODO Auto-generated method stub
-		
+		flatDAO.add(flat);		
 	}
+	/**
+	 *  обновляет запись КВАРТИРА в БД
+	 */
 	public void updateFlat(Flat flat) {
-		// TODO Auto-generated method stub
-		
+		flatDAO.update(flat);	
 	}
-	public void deleteFlat(Long id) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 *   удаляет запись КВАРТИРА
+	 */
+	public void deleteFlat(Flat flat) {
+		flatDAO.delete(flat);		
 	}
+	
+	// **************     CRUD для сущности ВЛАДЕЛЕЦ     *************
+	
+	/**
+	 *  поиск ВЛАДЕЛЬЦА по ID записи
+	 * @param id
+	 * @return объект  ВЛАДЕЛЕЦ
+	 */
+	public Owner findOwnerById(Long id) {
+		return ownerDAO.getById(id);
+	}
+	/**
+	 *   возвращает список ВЛАДЕЛЬЦЕВ
+	 * @return коллекция объектов ВЛАДЕЛЕЦ   
+	 */
+	public List<Owner> getAllOwners() {
+		return  ownerDAO.getAll();
+	}
+	/**
+	 * 	создаёт новую запись ВЛАДЕЛЕЦ
+	 * @param owner(ВЛАДЕЛЕЦ)
+	 */
+	public void addOwner(Owner owner) {
+		ownerDAO.add(owner);		
+	}
+	/**
+	 * 	обновляет запись ВЛАДЕЛЕЦ
+	 * @param owner(ВЛАДЕЛЕЦ)
+	 */
+	public void updateOwner(Owner owner) {
+		ownerDAO.update(owner);	
+	}
+	/**
+	 * 	удаляет запись ВЛАДЕЛЕЦ
+	 * @param owner(ВЛАДЕЛЕЦ)
+	 */
+	public void deleteOwner(Owner owner) {
+		ownerDAO.delete(owner);		
+	}
+	
+	// **************     CRUD для сущности ЛИЦЕВОЙ СЧЕТ     *************
+         /**
+          * 	получить лицевой счет по ID
+          * @param id записи ЛИЦЕВОГО СЧЕТА
+          * @return объект ЛИЦЕВОЙ СЧЕТ
+          */
+		public PersonalAccount findPersonalAccountById(Long id) {
+			return personalAccountDAO.getById(id);
+		}
+		/**
+		 * 	получить список Л.С.
+		 * @return список ЛИЦЕВЫХ СЧЕТОВ
+		 */
+		public List< PersonalAccount> getAllPersonalAccounts() {
+			return personalAccountDAO.getAll();
+		}
+		/**
+		 * 	создать ЛИЦЕВОЙ СЧЕТ
+		 * @param personalAccount
+		 */
+		public void addPersonalAccount(PersonalAccount personalAccount) {
+			personalAccountDAO.add(personalAccount);		
+		}
+		/**
+		 * 	обновление записи ЛИЦЕВОЙ СЧЕТ
+		 * @param personalAccount
+		 */
+		public void updatePersonalAccount(PersonalAccount personalAccount) {
+			personalAccountDAO.update(personalAccount);	
+		}
+		/**
+		 * 	удалить запись ЛИЦЕВОЙ СЧЕТ
+		 * @param personalAccount
+		 */
+		public void deletePersonalAccount(PersonalAccount personalAccount) {
+			personalAccountDAO.delete(personalAccount);		
+		}
+		
+		// *************** реализация бизнес логики ******************
+		
+
+		public BigDecimal getBalance() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		
+		
 	
 	// ************   setters для DAO объектов ***********************
 	
@@ -130,7 +241,4 @@ public class SomeServiceImpl implements SomeService {
 	public void setPersonalAccountDAO(PersonalAccountDAO personalAccountDAO) {
 		this.personalAccountDAO = personalAccountDAO;
 	}
-	
-	
-
 }

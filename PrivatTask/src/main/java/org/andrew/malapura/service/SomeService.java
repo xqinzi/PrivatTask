@@ -1,17 +1,24 @@
 package org.andrew.malapura.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.andrew.malapura.entity.Flat;
 import org.andrew.malapura.entity.House;
+import org.andrew.malapura.entity.Owner;
+import org.andrew.malapura.entity.PersonalAccount;
 import org.andrew.malapura.entity.Street;
 	/**
+	 * 
+	 * сервис предоставляющий методы CRUD
+	 * и реализацию бизнес логики
+	 * 
 	 * @author mav
 	 *
 	 */
 public interface SomeService {
 	
-	/// ----------  методы  CRUD для таблицы УЛИЦА   ---------------------
+	/// ----------  методы  CRUD для сущности УЛИЦА   ---------------------
 	/**
 	 * Возвращает список всех улиц
 	 * @return Arraylist<Street>
@@ -37,9 +44,9 @@ public interface SomeService {
 	/**
 	 *  удаление записи УЛИЦА
 	 */
-	void deleteStreet(Long id);
+	void deleteStreet(Street street);
 	
-	/// --------------   методы CRUD для таблицы ДОМ   ---------------------
+	/// --------------   методы CRUD для сущности ДОМ   ---------------------
 	/**
 	 * Возвращает список всех домов 
 	 * @return ArrayList<House>
@@ -66,9 +73,9 @@ public interface SomeService {
 	 *  удаление записи ДОМ
 	 *  @param id записи ДОМ
 	 */
-	void deleteHouse(Long id);
+	void deleteHouse(House house);
 	
-	/// --------------   методы CRUD для таблицы КВАРТИРА   ---------------------
+	/// --------------   методы CRUD для сущности КВАРТИРА   ---------------------
 	
 	/**
 	 * Возвращает список всех квартир 
@@ -88,7 +95,6 @@ public interface SomeService {
 	void addFlat(Flat flat);
 	/**
 	 *   обновление записи КВАРТИРА
-	 *   
 	 *   @param  объект КВАРТИРА 
 	 */
 	void updateFlat(Flat flat);
@@ -96,5 +102,67 @@ public interface SomeService {
 	 *  удаление записи КВАРТИРА
 	 *  @param id записи КВАРТИРА
 	 */
-	void deleteFlat(Long id);
+	void deleteFlat(Flat flat);
+	
+	// **************   методы CRUD для сущности ВЛАДЕЛЕЦ     *************
+	
+		/**
+		 *  поиск ВЛАДЕЛЬЦА по ID записи
+		 */
+		Owner findOwnerById(Long id);
+		/**
+		 *   возвращает список ВЛАДЕЛЬЦЕВ
+		 * @return коллекция объектов ВЛАДЕЛЕЦ   
+		 */
+		List<Owner> getAllOwners();
+		/**
+		 * 	создаёт новую запись ВЛАДЕЛЕЦ
+		 * @param owner(ВЛАДЕЛЕЦ)
+		 */
+		void addOwner(Owner owner);
+		/**
+		 * 	обновляет запись ВЛАДЕЛЕЦ
+		 * @param owner(ВЛАДЕЛЕЦ)
+		 */
+		void updateOwner(Owner owner);
+		/**
+		 * 	удаляет запись ВЛАДЕЛЕЦ
+		 * @param owner(ВЛАДЕЛЕЦ)
+		 */
+		void deleteOwner(Owner owner);
+		
+		// **************     CRUD для сущности ЛИЦЕВОЙ СЧЕТ     *************
+	         /**
+	          * 	получить лицевой счет по ID
+	          * @param id записи ЛИЦЕВОГО СЧЕТА
+	          * @return объект ЛИЦЕВОЙ СЧЕТ
+	          */
+			 PersonalAccount findPersonalAccountById(Long id);
+			/**
+			 * 	получить список Л.С.
+			 * @return список ЛИЦЕВЫХ СЧЕТОВ
+			 */
+			List< PersonalAccount> getAllPersonalAccounts();
+			/**
+			 * 	создать ЛИЦЕВОЙ СЧЕТ
+			 * @param personalAccount
+			 */
+			void addPersonalAccount(PersonalAccount personalAccount);
+			/**
+			 * 	обновление записи ЛИЦЕВОЙ СЧЕТ
+			 * @param personalAccount
+			 */
+			void updatePersonalAccount(PersonalAccount personalAccount);
+			/**
+			 * 	удалить запись ЛИЦЕВОЙ СЧЕТ
+			 * @param personalAccount
+			 */
+			void deletePersonalAccount(PersonalAccount personalAccount);
+			
+		// ************  методы БИЗНЕС-ЛОГИКИ  *****************
+			
+			/**
+			 *   получить сальдо начисленных и оплаченных средств
+			 */
+		BigDecimal getBalance();
 }

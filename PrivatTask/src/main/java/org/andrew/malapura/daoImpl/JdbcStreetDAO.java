@@ -17,7 +17,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 public class JdbcStreetDAO extends JdbcDaoSupport implements StreetDAO {
 	
 	/**
-	 *  добавить запись
+	 *  добавить УЛИЦУ в справочник
 	 */
 	public void add(Street street) {
 		String sql = "INSERT INTO STREET (STREET_NAME) VALUES (?)";
@@ -45,14 +45,15 @@ public class JdbcStreetDAO extends JdbcDaoSupport implements StreetDAO {
 		return result;
 	}
 	/**
-	 * 	обновление записи 
+	 * 	обновление объекта УЛИЦА
 	 */
 	public void update(Street street) {
 		String sql = "UPDATE STREET SET STREET_NAME = ? WHERE ID = ?";
 		getJdbcTemplate().update(sql, new Object[] { street.getStreetName(), street.getId() });
 	}
 	/**
-	 * 	удалить запись
+	 * 	удалить УЛИЦУ из справочника
+	 * 	@param Street street ( объект УЛИЦА ) 
 	 */
 	public void delete(Street street) {
 		String sql = "DELETE FROM STREET WHERE ID = ?";

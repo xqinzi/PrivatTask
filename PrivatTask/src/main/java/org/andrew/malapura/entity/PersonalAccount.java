@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * 
- *  РЎСѓС‰РЅРѕСЃС‚СЊ "Р›РёС†РµРІРѕР№ СЃС‡РµС‚"
+ *  сущность ЛИЦЕВОЙ СЧЕТ
  * 
  * @author mav
  *
@@ -12,14 +12,14 @@ import java.util.Date;
 
 public class PersonalAccount {
 	 
-	private Long id;  					// id Р·Р°РїРёСЃРё
-	private String accountNumber;  // РќРѕРјРµСЂ Р»РёС†РµРІРѕРіРѕ СЃС‡РµС‚Р°
-	private String accountType;		// С‚РёРї Р».СЃ. (РєРІР°СЂС‚РїР»Р°С‚Р°, РіР°Р·РѕСЃРЅР°Р±Р¶., РІРѕРґРѕСЃРЅР°Р±Р¶, Рё С‚.Рґ.)
-	private Long flatId;				    // СЃСЃС‹Р»РєР° РЅР° РѕР±СЉРµРєС‚ РљР’РђР РўР?Р Рђ
-	private Long ownerId;				// СЃСЃС‹Р»РєР° РЅР° РѕР±СЉРµРєС‚ Р’Р›РђР”Р•Р›Р•Р¦ Р».СЃ.
-	private Date createdDate;        // РґР°С‚Р° СЃРѕР·РґР°РЅРёСЏ Р».СЃ.
+	private Long id;  					     // id записи в БД
+	private String accountNumber;   // номер лицевого счета
+	private String accountType;		 // тип л.с. (квартплата, водоснабжение, газоснабжение)
+	private Flat flat;				         // квартира 
+	private Owner owner;				 // владелец лицевого счета
+	private Date createdDate;          // дата создания л.с.
 	
-	//   Getters and Setters
+	//  *******    Getters and Setters  ***************
 	
 	public Long getId() {
 		return id;
@@ -39,17 +39,17 @@ public class PersonalAccount {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
-	public Long getFlatId() {
-		return flatId;
+	public Flat getFlat() {
+		return flat;
 	}
-	public void setFlatId(Long flatId) {
-		this.flatId = flatId;
+	public void setFlat(Flat flat) {
+		this.flat = flat;
 	}
-	public Long getOwnerId() {
-		return ownerId;
+	public Owner getOwner() {
+		return owner;
 	}
-	public void setOwnerId(Long ownerId) {
-		this.ownerId = ownerId;
+	public void setOwner(Owner owner) {
+		this.owner = owner;
 	}
 	public Date getCreatedDate() {
 		return createdDate;

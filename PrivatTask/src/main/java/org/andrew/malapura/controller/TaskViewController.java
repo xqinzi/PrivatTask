@@ -24,7 +24,7 @@ public class TaskViewController implements Controller{
 			}
 			
 	for (Flat f : service.getAllFlats()) {
-			System.out.println("адрес :"+f.getHouse().getStreet().getStreetName()+" "+f.getHouse().getHouseNumber()+"/"+f.getNumber());
+			System.out.println("адрес :"+f.getHouse().getStreet().getStreetName()+" "+f.getHouse().getHouseNumber()+"/"+f.getNumber()+"HOUSE ID:"+f.getHouse().getId());
 			}
 		}catch(NullPointerException e){
 		System.out.println("NullPointerExeption!!!");	
