@@ -59,6 +59,16 @@ public class JdbcStreetDAO extends JdbcDaoSupport implements StreetDAO {
 		String sql = "DELETE FROM STREET WHERE ID = ?";
 		getJdbcTemplate().update(sql, new Object[] { street.getId() });
 	}
-
+	/**
+	 *   возвращает объект УЛИЦА на названию
+	 *   @param название улицы
+	 *   @return объект УЛИЦА
+	 */
+	public Street findStreetByName(String nameStreet){
+		String sql = "SELECT * FROM STREET WHERE STREET_NAME = ?";
+		StreetRowMapper mapper = new StreetRowMapper();
+		getJdbcTemplate().queryForObject(sql, new Object[]{ nameStreet }, mapper);
+		return mapper.getStreet();
+	}
 
 }

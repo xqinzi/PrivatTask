@@ -1,6 +1,8 @@
 package org.andrew.malapura.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.andrew.malapura.dao.FlatDAO;
@@ -208,6 +210,115 @@ public class SomeServiceImpl implements SomeService {
 		 */
 		public void deletePersonalAccount(PersonalAccount personalAccount) {
 			personalAccountDAO.delete(personalAccount);		
+		}
+		
+		//***************  реализация поиска ***********************
+		
+		/**
+		 *   		поиск ВЛАДЕЛЬЦА по Ф.И.О.
+		 *   @param  Ф.И.О. владельца
+		 *   @return List<PersonalAccount>(коллеция Л.С.)
+		 */
+		public List<PersonalAccount> findByOwnerName(String firstName, String patronymic, String secondName){
+			/**
+			 *      коллекция ВЛАДЕЛЬЦЕВ с заданным ФИО
+			 */
+			ArrayList<Owner> owners = (ArrayList<Owner>) ownerDAO.getOwnerByName(firstName, patronymic, secondName);
+			/**
+			 *     коллекция Л.С.
+			 */
+			ArrayList<PersonalAccount> target = new ArrayList<PersonalAccount>(); 
+			
+			for(Iterator<Owner> iterator = owners.iterator(); iterator.hasNext();){
+					/**
+					 *    коллекция объектов Л.С. на данной итерации
+					 */
+				    ArrayList<PersonalAccount> paList =  (ArrayList<PersonalAccount>) personalAccountDAO.findPersonalAccount(BY_OWNER , iterator.next());
+				    /**
+				     *     склеиваем коллекции
+				     */
+				    ArrayList<PersonalAccount> tmp = new ArrayList<PersonalAccount>(target);
+				    tmp.addAll(paList);
+				    target = tmp;
+			}
+			return target;
+		}
+		
+		/**
+		 *   		поиск по номеру ЛИЦЕВОГО СЧЕТА
+		 *   @param номер ЛИЦЕВОГО СЧЕТА
+		 *   @return ЛИЦЕВОЙ СЧЕТ
+		 */
+		public PersonalAccount findByPersonalAccountNumber(String personalAccountNumber){
+			return personalAccountDAO.findByAccountNumber(personalAccountNumber);
+		}
+		
+		/**
+		 *   					поиск по адресу
+		 *   @param название улицы
+		 *   @param номер дома
+		 *   @param номер квартиры
+		 *   @return List<PersonalAccount>(коллеция Л.С.)
+		 */
+		public List<PersonalAccount> findByAddress(String streetName, String houseNumber, String flatNumber){
+						/**
+						 *    квартира по данному адресу
+						 */
+					Flat address = flatDAO.findFlatByAddress(streetName, houseNumber, flatNumber);
+					  /**
+					   *     коллекция Л.С. для квартиры(адресу)
+					   */
+					ArrayList<PersonalAccount> target = (ArrayList<PersonalAccount>) personalAccountDAO.findPersonalAccount(BY_FLATE, address);
+			return target;
+		}
+		
+		/**
+		 *   				поиск по номеру дома
+		 *   @param номер дома
+		 *   @return List<PersonalAccount>(коллеция Л.С.)
+		 */
+		public List<PersonalAccount> findByHouseNumber(String houseNumber){			
+			/**
+			 *      коллекция ВЛАДЕЛЬЦЕВ с заданным номером ДОМА
+			 */
+			ArrayList<House> houses = (ArrayList<House>) houseDAO.findHousesByNumber(houseNumber);
+			/**
+			 *     коллекция Л.С.
+			 */
+			ArrayList<PersonalAccount> target = new ArrayList<PersonalAccount>(); 
+			
+			for(Iterator<House> iterator = houses.iterator(); iterator.hasNext();){
+					/**
+					 *    коллекция объектов Л.С. на данной итерации
+					 */
+				    ArrayList<PersonalAccount> paList =  (ArrayList<PersonalAccount>) personalAccountDAO.findPersonalAccount(BY_HOUSE , iterator.next());
+				    /**
+				     *     склеиваем коллекции
+				     */
+				    ArrayList<PersonalAccount> tmp = new ArrayList<PersonalAccount>(target);
+				    tmp.addAll(paList);
+				    target = tmp;
+			}
+			return target;
+		}
+		
+		
+		/**
+		 *   				поиск по названию улицы
+		 *   @param номер улицы
+		 *   @return List<PersonalAccount>(коллеция Л.С.)
+		 */
+		public List<PersonalAccount> findByStreetName(String streetName){
+			/**
+			 *      УЛИЦА с названием ...
+			 */
+			Street street = (Street) streetDAO.findStreetByName(streetName);
+			/**
+			 *     коллекция Л.С.
+			 */
+			ArrayList<PersonalAccount> target = (ArrayList<PersonalAccount>) personalAccountDAO.findPersonalAccount(BY_STREET ,street);
+
+			return target;
 		}
 		
 		// *************** реализация бизнес логики ******************

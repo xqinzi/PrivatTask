@@ -3,8 +3,6 @@ package org.andrew.malapura.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.andrew.malapura.entity.Flat;
-import org.andrew.malapura.entity.Street;
 import org.andrew.malapura.service.SomeService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -19,15 +17,9 @@ public class TaskViewController implements Controller{
 	public ModelAndView handleRequest(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 		try{
-			for (Street s : service.getAllStreet()) {
-				System.out.println(s.getStreetName());
-			}
-			
-	for (Flat f : service.getAllFlats()) {
-			System.out.println("адрес :"+f.getHouse().getStreet().getStreetName()+" "+f.getHouse().getHouseNumber()+"/"+f.getNumber()+"HOUSE ID:"+f.getHouse().getId());
-			}
-		}catch(NullPointerException e){
-		System.out.println("NullPointerExeption!!!");	
+				System.out.println(service.findByOwnerName("Николай", "Петрович", "Бородач").size()) ;
+		}catch(Exception e){
+		e.printStackTrace();
 		}
 
 		

@@ -26,7 +26,7 @@ public class JdbcOwnerDAO extends JdbcDaoSupport implements OwnerDAO {
 	public Owner getById(Long id) {
 		String sql = "SELECT * FROM OWNER WHERE ID = ?";
 		OwnerRowMapper mapper = new OwnerRowMapper();
-		getJdbcTemplate().query(sql, new Object[]{}, mapper);
+		getJdbcTemplate().query(sql, new Object[]{ id }, mapper);
 		return mapper.getOwner();
 	}
 	/**
@@ -54,6 +54,18 @@ public class JdbcOwnerDAO extends JdbcDaoSupport implements OwnerDAO {
 	public void delete(Owner owner) {
 		String sql = "DELETE FROM OWNER WHERE ID = ?";
 		getJdbcTemplate().update(sql, new Object[] { owner.getId() });
+	}
+	/**
+	 * @param Имя
+	 * @param Отчество
+	 * @param Фамилия
+	 * @return коллекция объектов ВЛАДЕЛЕЦ
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Owner> getOwnerByName(String firstName, String patronymic, String secondName) {
+		String sql = "SELECT * FROM OWNER WHERE  FIRST_NAME = ? AND PATRONYMIC = ? AND SECOND_NAME = ?";
+				ArrayList<Owner> ownerList = (ArrayList<Owner>)getJdbcTemplate().query(sql, new Object[]{ firstName, patronymic, secondName }, new OwnerRowMapper());
+		return ownerList;
 	}
 
 }
