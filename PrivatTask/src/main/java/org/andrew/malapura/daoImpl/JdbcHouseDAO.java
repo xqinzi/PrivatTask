@@ -68,5 +68,27 @@ public class JdbcHouseDAO extends JdbcDaoSupport implements HouseDAO {
 		getJdbcTemplate().update(sql, new Object[] { house.getId() });
 
 	}
+	/**
+	 *  возвращает коллекцию ДОМОВ по номеру
+	 *  @param номер ДОМА
+	 *  @return коллекция объектов ДОМ
+	 */
+	public List<House> findHousesByNumber(String houseNumber) {
+		String sql = "SELECT * FROM HOUSE AS H LEFT JOIN STREET AS S  ON H.STREET_ID = S.ID WHERE H.HOUSE_NUMBER = ?";
+		@SuppressWarnings("unchecked")
+		ArrayList<House> houses=(ArrayList<House>) getJdbcTemplate().query(sql, new Object[] { houseNumber }, new HouseRowMapper());
+		return houses;
+	}
+	/**
+	 *  возвращает коллекцию ДОМОВ по улице
+	 *  @param название улицы
+	 *  @return коллекция объектов ДОМ  
+	 */
+	public List<House> findHousesByStreetName(String streetName) {
+		String sql = "SELECT * FROM HOUSE AS H LEFT JOIN STREET AS S  ON H.STREET_ID = S.ID WHERE S.STREET_NAME = ?";
+		@SuppressWarnings("unchecked")
+		ArrayList<House> houses=(ArrayList<House>) getJdbcTemplate().query(sql, new Object[] {streetName },  new HouseRowMapper());
+		return houses;
+	}
 
 }

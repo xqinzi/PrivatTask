@@ -34,9 +34,9 @@ public class JdbcFlatDAO extends JdbcDaoSupport implements FlatDAO {
 		/**
 		 *  	SQL запрос
 		 */
-		String sql = "SELECT * FROM FLAT WHERE ID = ?";
+		String sql = "SELECT * FROM FLAT AS F LEFT JOIN HOUSE AS H ON F.HOUSE_ID = H.ID  LEFT JOIN STREET AS S  ON H.STREET_ID = S.ID WHERE ID = ?";
 		FlatRowMapper mapper = new FlatRowMapper();
-		getJdbcTemplate().query(sql, mapper);
+		getJdbcTemplate().query(sql, new Object[]{id}, mapper);
 		return mapper.getFlat();
 	}
     /**
@@ -45,7 +45,7 @@ public class JdbcFlatDAO extends JdbcDaoSupport implements FlatDAO {
      */
 	public List<Flat> getAll() {
 		/**
-		 *  	SQL запрос
+		 *  	SQL запрос 
 		 */
 		String sql = "SELECT * FROM FLAT AS F LEFT JOIN HOUSE AS H ON F.HOUSE_ID = H.ID  LEFT JOIN STREET AS S  ON H.STREET_ID = S.ID";
 		@SuppressWarnings("unchecked")
@@ -74,6 +74,15 @@ public class JdbcFlatDAO extends JdbcDaoSupport implements FlatDAO {
 		 */
 		String sql = "DELETE FROM FLAT WHERE ID = ?";
 		getJdbcTemplate().update(sql, new Object[] { flat.getId() });
+	}
+	
+	
+	public Flat findFlatByAddress(String streetName, String houseNumber, String flatNumber) {
+		String sql = "SELECT * FROM FLAT AS F LEFT JOIN HOUSE AS H ON F.HOUSE_ID = H.ID  LEFT JOIN STREET AS S  ON H.STREET_ID = S.ID "+
+						  "WHERE S.STREET_NAME = ? AND H.HOUSE_NUMBER = ? AND F.NUMBER = ?";
+		FlatRowMapper mapper = new FlatRowMapper();
+		getJdbcTemplate().query(sql, new Object[]{streetName, houseNumber, flatNumber}, mapper);
+		return mapper.getFlat();
 	}
 
 }

@@ -18,6 +18,14 @@ import org.andrew.malapura.entity.Street;
 	 */
 public interface SomeService {
 	
+	/**
+	 *   Параметры для поиска ЛИЦЕВЫХ СЧЕТОВ
+	 */
+	int BY_OWNER = 0;   				// по владельцу
+	int BY_FLATE = 1;   				// по квартире (адресу)
+	int BY_HOUSE = 2;					// по дому	
+	int BY_STREET = 3;				// по улице
+	
 	/// ----------  методы  CRUD для сущности УЛИЦА   ---------------------
 	/**
 	 * Возвращает список всех улиц
@@ -159,10 +167,49 @@ public interface SomeService {
 			 */
 			void deletePersonalAccount(PersonalAccount personalAccount);
 			
+		// ************ поиск ЛИЦЕВЫХ СЧЕТОВ ******************
+			
+			/**
+			 *   		поиск по Ф.И.О.
+			 *   @param  Ф.И.О. владельца
+			 *   @return List<PersonalAccount>(коллеция Л.С.)
+			 */
+			List<PersonalAccount> findByOwnerName(String ownerName, String patronymic, String secondName);
+			
+			/**
+			 *   		поиск по номеру ЛИЦЕВОГО СЧЕТА
+			 *   @param номер ЛИЦЕВОГО СЧЕТА
+			 *   @return ЛИЦЕВОЙ СЧЕТ
+			 */
+			PersonalAccount findByPersonalAccountNumber(String personalAccountNumber);
+			
+			/**
+			 *   					поиск по адресу
+			 *   @param название улицы
+			 *   @param номер дома
+			 *   @param номер квартиры
+			 *   @return List<PersonalAccount>(коллеция Л.С.)
+			 */
+			List<PersonalAccount> findByAddress(String streetName, String houseNumber, String flatNumber);
+			
+			/**
+			 *   				поиск по номеру дома
+			 *   @param номер дома
+			 *   @return List<PersonalAccount>(коллеция Л.С.)
+			 */
+			List<PersonalAccount> findByHouseNumber(String houseNumber);
+			
+			/**
+			 *   				поиск по названию улицы
+			 *   @param номер улицы
+			 *   @return List<PersonalAccount>(коллеция Л.С.)
+			 */
+			List<PersonalAccount> findByStreetName(String streetName);
+			
 		// ************  методы БИЗНЕС-ЛОГИКИ  *****************
 			
 			/**
-			 *   получить сальдо начисленных и оплаченных средств
+			 *   возвращает сальдо начисленных и оплаченных средств
 			 */
 		BigDecimal getBalance();
 }

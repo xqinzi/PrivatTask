@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.andrew.malapura.dao.PersonalAccountDAO;
+import org.andrew.malapura.entity.Flat;
+import org.andrew.malapura.entity.House;
+import org.andrew.malapura.entity.Owner;
 import org.andrew.malapura.entity.PersonalAccount;
+import org.andrew.malapura.entity.Street;
 import org.andrew.malapura.model.PersonalAccountRowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 /**
@@ -29,9 +33,9 @@ public class JdbcPersonalAccountDAO extends JdbcDaoSupport implements
 	 *    @return объект Л.С. 
 	 */
 	public PersonalAccount getById(Long id) {
-		String sql = "select * from personal_account where id = ?";
+		String sql = SELECT_QUERY + " where pa.id = ?";
 		PersonalAccountRowMapper mapper = new PersonalAccountRowMapper();
-		getJdbcTemplate().query(sql, mapper);
+		getJdbcTemplate().query(sql, new Object[] {id}, mapper);
 		return mapper.getPersonalAccount();
 	}
 	/**
@@ -39,11 +43,7 @@ public class JdbcPersonalAccountDAO extends JdbcDaoSupport implements
 	 * @return List<PersonalAccount>(коллекция Л.С).
 	 */
 	public List<PersonalAccount> getAll() {
-		  String sql = "select * from personal_account as pa" +
-							" left join flat as f on pa.flat_id = f.id"+
-							" left join owner as o on pa.owner_id = o.id"+
-							" left join house as h on f.house_id = h.id"+
-							" left join street as s on h.street_id = s.id";
+		  String sql = SELECT_QUERY ;
 		  @SuppressWarnings("unchecked")
 		ArrayList<PersonalAccount> persAccounts = ( ArrayList<PersonalAccount>) getJdbcTemplate().query(sql, new PersonalAccountRowMapper());
 		return persAccounts;
@@ -66,6 +66,80 @@ public class JdbcPersonalAccountDAO extends JdbcDaoSupport implements
 	public void delete(PersonalAccount personalAccount) {
 		String sql = "DELETE FROM PERSONAL_ACCOUNT WHERE ID = ?";
 		getJdbcTemplate().update(sql, new Object[] { personalAccount.getId() });
+	}
+	
+   /**
+    * 							 поиск Л.С. по параметру
+    */
+	@SuppressWarnings("unchecked")
+	public<V> List<PersonalAccount> findPersonalAccount(final int findParam, V value) {
+		
+		ArrayList<PersonalAccount> target = null;
+		String sql = "";
+		
+		switch (findParam) {
+		
+						/**
+						 *   поиск по  параметру ВЛАДЕЛЕЦ
+						 */
+			case 0:
+				if(value.getClass().equals(Owner.class)){
+						Owner owner = (Owner) value;  
+						sql = SELECT_QUERY + "where o.id = ?";
+						target = (ArrayList<PersonalAccount>) getJdbcTemplate().query(sql, new Object[] { owner.getId() } , new PersonalAccountRowMapper());
+				}
+				break;
+				
+				
+						/**
+						 *   поиск по  параметру КВАРТИРА
+						 */
+			case 1:
+				if(value.getClass().equals(Flat.class)){
+						Flat flat = (Flat) value;
+						sql = SELECT_QUERY + "where f.id = ?";
+						target = (ArrayList<PersonalAccount>) getJdbcTemplate().query(sql, new Object[] { flat.getId() } , new PersonalAccountRowMapper());
+				}
+				
+				break;
+				
+				
+						/**
+						 *   поиск по  параметру ДОМ
+						 */
+			case 2:
+				if(value.getClass().equals(House.class)){
+						House house = (House) value;
+						sql = SELECT_QUERY + "where h.id = ?";
+						target = (ArrayList<PersonalAccount>) getJdbcTemplate().query(sql, new Object[] { house.getId() } , new PersonalAccountRowMapper());
+				}
+				break;
+				
+				
+						/**
+						 *   поиск по  параметру УЛИЦА
+						 */
+			case 3:
+				if(value.getClass().equals(Street.class)){
+					Street street = (Street) value;
+					sql = SELECT_QUERY + "where s.id = ?";
+					target = (ArrayList<PersonalAccount>) getJdbcTemplate().query(sql, new Object[] { street.getId() } , new PersonalAccountRowMapper());
+			}
+				break;
+		}
+		
+		return target;
+	}
+	/**
+	 * 
+	 * @param номер Л.С.
+	 * @return объект Л.С.
+	 */
+	public PersonalAccount findByAccountNumber(String accountNumber) {
+		String sql = SELECT_QUERY + "where pa.account_number = ?";
+		PersonalAccountRowMapper mapper = new PersonalAccountRowMapper();
+		getJdbcTemplate().query(sql, new Object[] { accountNumber }, mapper);
+		return mapper.getPersonalAccount();
 	}
 
 }
