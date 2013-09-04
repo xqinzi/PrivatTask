@@ -7,14 +7,32 @@
         <property name="prefix"><value>/WEB-INF/jsp/</value></property>
         <property name="suffix"><value>.jsp</value></property>
 	</bean>
+	
+	<!-- Контроллер главной страницы -->
 	<bean id="taskViewController" class="org.andrew.malapura.controller.TaskViewController">
 	</bean>
+	<!-- Контроллер страницы справочников -->
+	<bean id="referenceBookController" class="org.andrew.malapura.controller.ReferenceBookController">
+	</bean>
+	
+	<bean id="classNameMapping" class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
+	<bean id="addPersonalAccount" class="org.andrew.malapura.controller.AddPersonalAccountController">
+		<property name="formView" value="newPersAccount" />
+		<property name="successView" value="application" />
+	</bean>
+	
 	<bean id="urlMapping" 
           class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
           <property name="urlMap">
                <map>
                     <entry key="/application.htm">
                          <ref bean="taskViewController" />
+                    </entry>
+                    <entry key="/referencebook.htm">
+                         <ref bean="referenceBookController" />
+                    </entry>
+                    <entry key="/addPersonalAccount.htm">
+                         <ref bean="addPersonalAccount" />
                     </entry>
                </map>
           </property>

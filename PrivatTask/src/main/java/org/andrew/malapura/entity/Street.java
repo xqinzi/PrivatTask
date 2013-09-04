@@ -3,12 +3,12 @@ package org.andrew.malapura.entity;
  * 
  * @author mav
  *  
- *  РЎСѓС‰РЅРѕСЃС‚СЊ "РЈР»РёС†Р°"
+ *  сущность Улица
  */
 public class Street {
 	
-	private Long id;						  //  РёРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ Р·Р°РїРёСЃРё
-	private String streetName;		  //  РЅР°Р·РІР°РЅРёРµ СѓР»РёС†С‹
+	private Long id;						  //  ID
+	private String streetName;		  //  название улицы
 	
 	// ----------  getters and setters ----------------
 	
