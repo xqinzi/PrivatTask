@@ -17,9 +17,26 @@
 	
 	<bean id="classNameMapping" class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
 	<bean id="addPersonalAccount" class="org.andrew.malapura.controller.AddPersonalAccountController">
-		<property name="formView" value="newPersAccount" />
-		<property name="successView" value="application" />
+		<property name="formView" value="addPersonalAccount" />
+		<property name="successView" value="taskView" />
+		<!-- Map a validator -->
+	<property name="validator">
+		<bean class="org.andrew.malapura.validator.PersonalAccountValidator" />
+	</property>
 	</bean>
+	
+	<bean name="messageSource"
+        class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basename" value="WEB-INF/classes/messages"/>
+        <property name="defaultEncoding" value="utf-8"/>
+    </bean>
+		
+	<!-- Declare the Interceptor -->
+    <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+        <property name="paramName" value="locale"/>
+    </bean>
+    <!-- Declare the Resolver -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 	
 	<bean id="urlMapping" 
           class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">

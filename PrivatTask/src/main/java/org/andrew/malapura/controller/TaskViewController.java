@@ -22,6 +22,10 @@ public class TaskViewController implements Controller{
 	private SomeService service = (SomeService) context.getBean("someService");
 	private ArrayList<PersonalAccount> tableData ;
 	
+	/**
+	 *    @param  request - запрос
+	 *    @param  response - ответ
+	 */
 	public ModelAndView handleRequest(HttpServletRequest request,	HttpServletResponse response) throws Exception {
 		try{
 				tableData = (ArrayList<PersonalAccount>)service.getAllPersonalAccounts();

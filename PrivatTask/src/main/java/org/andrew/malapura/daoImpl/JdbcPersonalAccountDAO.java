@@ -135,10 +135,10 @@ public class JdbcPersonalAccountDAO extends JdbcDaoSupport implements
 	 * @param номер Л.С.
 	 * @return объект Л.С.
 	 */
-	public PersonalAccount findByAccountNumber(String accountNumber) {
+	public PersonalAccount findByAccountNumber(String personalAccountNumber) {
 		String sql = SELECT_QUERY + "where pa.account_number = ?";
 		PersonalAccountRowMapper mapper = new PersonalAccountRowMapper();
-		getJdbcTemplate().query(sql, new Object[] { accountNumber }, mapper);
+		getJdbcTemplate().query(sql, new Object[] { personalAccountNumber }, mapper);
 		return mapper.getPersonalAccount();
 	}
 

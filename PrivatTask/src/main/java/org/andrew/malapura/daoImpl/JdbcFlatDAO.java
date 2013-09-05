@@ -34,7 +34,7 @@ public class JdbcFlatDAO extends JdbcDaoSupport implements FlatDAO {
 		/**
 		 *  	SQL запрос
 		 */
-		String sql = "SELECT * FROM FLAT AS F LEFT JOIN HOUSE AS H ON F.HOUSE_ID = H.ID  LEFT JOIN STREET AS S  ON H.STREET_ID = S.ID WHERE ID = ?";
+		String sql = "SELECT * FROM FLAT AS F LEFT JOIN HOUSE AS H ON F.HOUSE_ID = H.ID  LEFT JOIN STREET AS S  ON H.STREET_ID = S.ID WHERE F.ID = ?";
 		FlatRowMapper mapper = new FlatRowMapper();
 		getJdbcTemplate().query(sql, new Object[]{id}, mapper);
 		return mapper.getFlat();
