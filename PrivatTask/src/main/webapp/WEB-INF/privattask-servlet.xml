@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
-
 <beans>
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="viewClass"><value>org.springframework.web.servlet.view.JstlView</value></property>
@@ -16,6 +15,7 @@
 	</bean>
 	
 	<bean id="classNameMapping" class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping" />
+	
 	<bean id="addPersonalAccount" class="org.andrew.malapura.controller.AddPersonalAccountController">
 		<property name="formView" value="addPersonalAccount" />
 		<property name="successView" value="taskView" />
@@ -23,6 +23,15 @@
 	<property name="validator">
 		<bean class="org.andrew.malapura.validator.PersonalAccountValidator" />
 	</property>
+	</bean>
+	
+	<bean id="find" class="org.andrew.malapura.controller.FindController">
+		<property name="formView" value="findaccount" />
+		<property name="successView" value="findaccount" />
+			<!-- validator -->
+		<property name="validator">
+			<bean class="org.andrew.malapura.validator.PersonalAccountValidator" />
+		</property>
 	</bean>
 	
 	<bean name="messageSource"

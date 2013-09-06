@@ -9,10 +9,30 @@
 <title>новый Л.С.</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="app-style.css" type="text/css"/>
-<link rel="stylesheet" href="jquery-ui.css" type="text/css"/>
 <script src="<c:url value='/js/jquery-1.10.2.min.js' />"></script>
 <script src="<c:url value='/js/jquery-ui.js' />"></script>
 <script>
+jQuery(function($){
+    $.datepicker.regional['ru'] = {
+            closeText: 'Закрыть',
+            prevText: '&#x3c;Пред',
+            nextText: 'След&#x3e;',
+            currentText: 'Сегодня',
+            monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь',
+            'Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+            monthNamesShort: ['Янв','Фев','Мар','Апр','Май','Июн',
+            'Июл','Авг','Сен','Окт','Ноя','Дек'],
+            dayNames: ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+            dayNamesShort: ['вск','пнд','втр','срд','чтв','птн','сбт'],
+            dayNamesMin: ['Вс','Пн','Вт','Ср','Чт','Пт','Сб'],
+            weekHeader: 'Нед',
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            yearSuffix: ''};
+    $.datepicker.setDefaults($.datepicker.regional['ru']);
+});
 $(function() {
 $( "#datepicker" ).datepicker();
 });

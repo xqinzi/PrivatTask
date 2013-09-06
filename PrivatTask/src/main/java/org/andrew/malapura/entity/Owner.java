@@ -5,17 +5,17 @@ import java.util.Date;
  * 
  * @author mav
  *
- *   РЎСѓС‰РЅРѕСЃС‚СЊ Р’Р›РђР”Р•Р›Р•Р¦ Р›.РЎ.
+ *   сущность ВЛАДЕЛЕЦ
  *
  */
 public class Owner {
 
 	private Long id;
-	private String firstName;            //  РРјСЏ
-    private String patronymic;          //  РћС‚С‡РµСЃС‚РІРѕ
-	private String secondName;        //  Р¤Р°РјРёР»РёСЏ
-	private Date birthday;                //  РґР°С‚Р° СЂРѕР¶РґРµРЅРёСЏ
-	private String inn;						   // РёРЅРґРёС„РёРєР°С†РёРѕРЅРЅС‹Р№ РєРѕРґ
+	private String firstName;            //  Имя 
+    private String patronymic;          //  Отчество
+	private String secondName;        //  Фамилия
+	private Date birthday;                //  дата рождения
+	private String inn;						   // инн
 	
 	// Getters and Setters
 	

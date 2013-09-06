@@ -40,6 +40,7 @@ public class AddPersonalAccountController extends SimpleFormController {
 			public AddPersonalAccountController(){
 				setCommandClass(SimplePersonalAccount.class);
 				setCommandName("addPersonalAccountForm");
+				
 			}
 			 /**
 			  *   метод вызываемый по событию
@@ -59,7 +60,7 @@ public class AddPersonalAccountController extends SimpleFormController {
 			@Override
 			protected Map<String, Map<?, String>> referenceData(HttpServletRequest request)
 					throws Exception {
-				
+				System.out.println(request.getContextPath());
 				Map<String, Map<?, String>> referenceData = new HashMap<String, Map<?, String>>();
 				
 				// Данные для выпадающего списка квартир
